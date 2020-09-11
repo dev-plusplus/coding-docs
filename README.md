@@ -2,7 +2,7 @@
 
 ## 1. Applications Starters:
 
-Appication starter help put together the initial boilerplate to develop a project on Cobuild Labs:
+Appication starters to help build the initial boilerplate to develop a project at Cobuild Lab:
 
 * ESLINT configuration
 * Prettier configuration
@@ -12,6 +12,8 @@ Appication starter help put together the initial boilerplate to develop a projec
 * Cypress configuration and example test (Web applications only)
 * Git ignore file
 * npm ignore file
+* Pull Request Templates
+* Issue Templates
 
 ### - 8base React SPA Typescript Application Starter: https://github.com/cobuildlab/create-react-typescript-app
 ### - NextJS Typescript Application Starter:
