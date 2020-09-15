@@ -16,13 +16,15 @@ Appication starters to help build the initial boilerplate to develop a project a
 * Issue Templates
 
 ### - 8base React SPA Typescript Application Starter:  
-https://github.com/cobuildlab/create-react-typescript-app
-### - NextJS Typescript Application Starter:
+`https://github.com/cobuildlab/create-react-typescript-app`
+### - NextJS Typescript Application Starter:  
+`pending`
 ### - NodeJs Typescript Application Starter:  
-https://github.com/cobuildlab/create-nodejs-app
-### - 8base Typescript cloud functions Starter:
+`https://github.com/cobuildlab/create-nodejs-app`
+### - 8base Typescript cloud functions Starter:  
+`pending`
 ### - React Native Typescript Starter:  
-https://github.com/cobuildlab/create-react-native-typescript-app
+`https://github.com/cobuildlab/create-react-native-typescript-app`
 
 
 ## 2. State Library: 
