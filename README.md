@@ -29,17 +29,69 @@ https://github.com/cobuildlab/create-react-native-typescript-app
 
 ## 2. State Library: 
 
-`TODO:`
+### Aplication State (Shared state): [React Simple State](https://github.com/cobuildlab/react-simple-state)
 
-https://github.com/cobuildlab/react-simple-state
+**Events Based Approach**
+```js
+// module-events.js
 
-Pending discussion: 
+const event = createEvent();
 
-https://github.com/cobuildlab/react-simple-state/issues/20  
-https://github.com/cobuildlab/react-simple-state/pull/19
+// module-actions.js
+
+const action = ()=> {
+  // Some logic
+  event.dispatch();
+}
+
+// View.js
+
+const MyComponent = ()=> {
+  const data = useEvent(event);
+  
+  useSubscription(event, ()=> {
+  
+  });
+}
+```
+
+### Local (ONLY) Component State: [Hooks utils](https://github.com/cobuildlab/hooks-utils)
+
+```js
+// module-actions.js
+
+const action = ()=> {
+  // Some logic
+  event.dispatch();
+}
+
+// View.js
+
+const MyComponent = ()=> {
+  // usePromise
+  const [data, loading, {error, call: ()=> action()} ] = usePromise(()=>action(), {
+    onComplete: (response)=>{
+      console.log(response) //  response
+    },
+    onError: (error)=>{
+      console.log(error) //  Error
+    },
+  });
+  
+  // useAction
+  const [data, loading, error, actionCaller] = useAction(()=> createProject(),
+      (data) => {
+        // Success result
+      },
+      (error) => {
+        // Errro result
+      }
+  ); 
+}
+
+```
 
 ## 3. 8base conventions: : [Here](./conventions/conventions-for-creating-8base-applications.md)
-
 ## 4. Effective Programming: A guide for conventions and best practices in software development: [Here](./conventions/effective-programming-at-cobuildlab.md)
 ## 5. Conventions for creating a React or React Native Application: : [Here](./conventions/conventions-for-creating-a-react-application.md)
 ## 6. Conventions for Javascript / Typescript source code: : [Here](./conventions/conventions-for-javascript-typescript-source-code.md)
