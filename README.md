@@ -29,7 +29,7 @@ https://github.com/cobuildlab/create-react-native-typescript-app
 
 ## 2. State Library: 
 
-### Aplication State (Shared state): [React Simple State](https://github.com/cobuildlab/react-simple-state)
+### Application State (Shared state): [React Simple State](https://github.com/cobuildlab/react-simple-state)
 
 **Events Based Approach**
 ```js
@@ -91,8 +91,56 @@ const MyComponent = ()=> {
 
 ```
 
-## 3. 8base conventions: : [Here](./conventions/conventions-for-creating-8base-applications.md)
-## 4. Effective Programming: A guide for conventions and best practices in software development: [Here](./conventions/effective-programming-at-cobuildlab.md)
-## 5. Conventions for creating a React or React Native Application: : [Here](./conventions/conventions-for-creating-a-react-application.md)
-## 6. Conventions for Javascript / Typescript source code: : [Here](./conventions/conventions-for-javascript-typescript-source-code.md)
-## 7. Git branches strategy for environments deployment on web applications
+## 3. Naming for Git Environment Branches, Feature Branches, and Pull Requests.
+
+### Environment Branches:
+
+- `main` for the main development branch, where all the integration happens first.
+- `stage` for the staging or pre production area. Here the clients can have access to the latest stable features. 
+- `master` for the main production environment.
+
+### Feature Branches
+
+```shell script
+git checkout -b [Parent Branch][Type]/[Issue Number]-[Short Desccription]
+```
+
+- `Parent Branch`: The branch from were the new branch was branched.  
+- `Type `: The purpose of the new branch, it can be: `fix`, `feature`, `tests`, `migration`, `docs`
+- `Issue Number`: The github issue number.    
+- `Short Description`: A Short description    
+
+
+#### Example
+
+```shell script
+git checkout -b prod/fix/1224-typos
+git checkout -b tests/24-add-tests
+```
+
+### Pull Requests
+
+```shell script
+[Type] [Envrionment] [Issue Number] [Short Description]
+```
+  
+- `Type `: The purpose of the pull requests, it can be: `[fix]`, `[feature]`, `[tests]`, `[migration]`, `[docs]`
+- `Environment`: The environment target of the Pull Request.
+- `Issue Number`: The github issue number.    
+- `Short Description`: A Short description    
+
+
+#### Example
+
+```shell script
+[fix] [prod] #1128 Adding 3d Secure support
+[docs] [master] #11 README
+[fix] [prod] #1 Typos
+```
+
+
+## 4. 8base conventions: : [Here](./conventions/conventions-for-creating-8base-applications.md)
+## 5. Effective Programming: A guide for conventions and best practices in software development: [Here](./conventions/effective-programming-at-cobuildlab.md)
+## 6. Conventions for creating a React or React Native Application: : [Here](./conventions/conventions-for-creating-a-react-application.md)
+## 7. Conventions for Javascript / Typescript source code: : [Here](./conventions/conventions-for-javascript-typescript-source-code.md)
+## 8. Git branches strategy for environments deployment on web applications
