@@ -139,3 +139,4 @@ const createProject = ()=> {
 ### Common
 
 ## 3. 8base database fields relationship naming
+## 4. Create User programmatically from 8base triggers to Auth0
