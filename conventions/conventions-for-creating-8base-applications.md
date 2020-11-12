@@ -134,9 +134,10 @@ const createProject = ()=> {
 
 ## 2. Signup / Login with Auth0 
 
+### Common
 ### For ReactJS
 ### For React Native
-### Common
+### Additional fields for Auth0 Signup
 
 ## 3. 8base database fields relationship naming
 ## 4. Create User programmatically from 8base triggers to Auth0
