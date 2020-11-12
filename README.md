@@ -143,4 +143,4 @@ git checkout -b tests/24-add-tests
 ## 5. Effective Programming: A guide for conventions and best practices in software development: [Here](./conventions/effective-programming-at-cobuildlab.md)
 ## 6. Conventions for creating a React or React Native Application: : [Here](./conventions/conventions-for-creating-a-react-application.md)
 ## 7. Conventions for Javascript / Typescript source code: : [Here](./conventions/conventions-for-javascript-typescript-source-code.md)
-## 8. Git branches strategy for environments deployment on web applications
+## 8. Git branches strategy for environments deployment on web applications: (TODO)

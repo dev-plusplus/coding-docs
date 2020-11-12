@@ -1,7 +1,9 @@
 
+# Conventions for creating 8base applications
+
 This is a proposal to document conventions and patterns for working with 8base.com platform
 
-1. Apollo Client:
+## 1. Apollo Client:
 
 This pattern explains how to generate the reference for the Apollo Client:
 
@@ -130,10 +132,10 @@ const createProject = ()=> {
 };
 ```
 
+## 2. Signup / Login with Auth0 
 
+### For ReactJS
+### For React Native
+### Common
 
-
-2. Signup / Login with Auth0 
-
-8base relationship naming
-8base relationship cardinallity
+## 3. 8base database fields relationship naming
