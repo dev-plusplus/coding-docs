@@ -559,6 +559,9 @@ export const validateProject = (user:User, project:Project): void  => {
 
 
 TODO:  
+- YUP + hook react form
+- ROLE BASED COMPONENTS: donde decidir que cargar
+- Share state: Custom Hooks vs React simple state: Events vs Providers
 - update lint config
 - update jsdocs
 - create logging rules
