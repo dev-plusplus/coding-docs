@@ -291,7 +291,72 @@ React applications must rely on the [Flux]([https://facebook.github.io/flux/](ht
 3) See number **10**
 
 
-## **7) Formatting and Linting:**
+## 7. State Library: 
+
+### Application State (Shared state): [React Simple State](https://github.com/cobuildlab/react-simple-state)
+
+**Events Based Approach**
+```js
+// module-events.js
+
+const event = createEvent();
+
+// module-actions.js
+
+const action = ()=> {
+  // Some logic
+  event.dispatch();
+}
+
+// View.js
+
+const MyComponent = ()=> {
+  const data = useEvent(event);
+  
+  useSubscription(event, ()=> {
+  
+  });
+}
+```
+
+### Local (ONLY) Component State: [Hooks utils](https://github.com/cobuildlab/hooks-utils)
+
+```js
+// module-actions.js
+
+const action = ()=> {
+  // Some logic
+  event.dispatch();
+}
+
+// View.js
+
+const MyComponent = ()=> {
+  // usePromise
+  const [data, loading, {error, call: ()=> action()} ] = usePromise(()=>action(), {
+    onComplete: (response)=>{
+      console.log(response) //  response
+    },
+    onError: (error)=>{
+      console.log(error) //  Error
+    },
+  });
+  
+  // useAction
+  const [data, loading, error, actionCaller] = useAction(()=> createProject(),
+      (data) => {
+        // Success result
+      },
+      (error) => {
+        // Errro result
+      }
+  ); 
+}
+
+```
+
+
+## 8) Formatting and Linting:
 
 For installation see: [Formatting and Linting for Javascript and Typescript applications](/conventions-for-javascript-typescript-source-code) 
 
@@ -355,7 +420,7 @@ module.exports = {
 }
 ```
 
-## **8) Prefer `Session` pattern for managing protected routes instead of `ProtectedRoute` pattern**
+## 9) Prefer `Session` pattern for managing protected routes instead of `ProtectedRoute` pattern
 
 For declarative routers like [React Router](https://reacttraining.com/react-router/) or [React Reach](https://reach.tech/router) prefer a Parent `Session` component that individuals `ProtectedRoute` components.
 
@@ -411,7 +476,7 @@ sddsf}
 * In React the Session component can be used for [Error Boundaries](https://reactjs.org/docs/error-boundaries.html). 
 
 
-## **9) Use shared `Permission` functions to control access to features and business operations:**
+## 10) Use shared `Permission` functions to control access to features and business operations:
 
 - Isolate permission logic in functions that are easy to and share.
 - A permission function should only depend dynamically on Business Objects.
@@ -463,7 +528,7 @@ export const canDeleteAllianceV2 = (user: User, alliance: Alliance): [boolean, s
 };
 ```
 
-## **9) Use shared `Validation` functions to control data integrity and consistency:**
+## 11) Use shared `Validation` functions to control data integrity and consistency:
 
 - Isolate validation logic in functions that are easy to share and reuse.
 - A validation function should only depend dynamically on Business Objects.
@@ -494,6 +559,9 @@ export const validateProject = (user:User, project:Project): void  => {
 
 
 TODO:  
+- YUP + hook react form
+- ROLE BASED COMPONENTS: donde decidir que cargar
+- Share state: Custom Hooks vs React simple state: Events vs Providers
 - update lint config
 - update jsdocs
 - create logging rules

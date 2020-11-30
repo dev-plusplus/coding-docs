@@ -132,12 +132,41 @@ const createProject = ()=> {
 };
 ```
 
-## 2. Signup / Login with Auth0 
+## 2. Invite users:
+
+### For Users that are new to the platform:
+
+When an email from an invitation doesn't exists in the platform, the ideal case is to programatically create the user in the Auth0 Database, ans then in 8base as a user in the User table. For this we use the Auth0 api to:
+
+ - Create the user in Auth0 with the Auth0 api
+ - Create the User on 8base database. 
+ - Create an Auth0 "ticket" for changing the password with at least 1 month of expiration. 
+ - This generates a Reset Password link that must be sent via email to the User, to facilitate the password setup.
+ - And then we continue with the email invitation steps.
+
+### Invitation steps:
+
+- Create a table with the Invitation details: 
+    * email: Of the user to be invited 
+    * text: To show in the invitations email or dialog.  This has to be manually put here because new users usually don't have access to the entities to be connected
+    * entity: The Entity to be connected. Client, company, etc
+    * status: PENDING: for new created invitations, ACCEPTED for accepted invitations, REJECTED for rejected invitations
+- The invitation should be sent by email with an *After Create Trigger*
+- The email sent to the User must have a link to go to see his invitations (See next Item)
+- The system should check when loading the Session, for *PENDING* invitations only to display to the user
+- The invitation should be accepted in a Resolver to skip permissions when connecting the `user` to the `entity`. This is because the `user` at this point (before connected) should not be able to access the `entity`. Remember to check permission in the resolver before accepting the initation: 
+     * The email of the user making the request to the Resolver must match the user being invited.
+     * The invitation must be on a PENDING status.
+
+
+
+
+## 3. Signup / Login with Auth0 
 
 ### Common
 ### For ReactJS
 ### For React Native
 ### Additional fields for Auth0 Signup
 
-## 3. 8base database fields relationship naming
-## 4. Create User programmatically from 8base triggers to Auth0
+## 4. 8base database fields relationship naming
+## 5. Deleting heavy objects (Objecct with lots of relationships)
