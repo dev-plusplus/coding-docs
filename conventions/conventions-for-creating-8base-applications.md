@@ -166,6 +166,147 @@ When an email from an invitation doesn't exists in the platform, the ideal case 
 ### Common
 ### For ReactJS
 ### For React Native
+
+#### Create app Auth0 account
+
+First we must login to Auth0 account and create a Native type application
+
+![rn auth0](media/nativeApp.png)
+
+#### You need the following information:
+ - Domain
+ - Client Id
+ - Client Secret
+
+#### Get Your Application Keys
+
+![rn auth0](media/getApiKeys.png)
+
+Run
+```shell script
+npm i -S react-native-auth0
+```
+
+#### iOS
+Then run in the ios folder
+```shell script
+pod install
+```
+In the file ios `ios/<YOUR PROJECT>/AppDelegate.m` add the following:
+
+```swift
+#import <React/RCTLinkingManager.h>
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
+{
+  return [RCTLinkingManager application:app openURL:url options:options];
+}
+```
+Inside the `ios` folder open the `Info.plist` and locate the value for `CFBundleIdentifier`
+
+```xml
+<key>CFBundleIdentifier</key>
+<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+```
+
+then below register a URL type entry using the value of `CFBundleIdentifier` as the value for the `CFBundleURLSchemes`:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>None</string>
+        <key>CFBundleURLName</key>
+        <string>auth0</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+        </array>
+    </dict>
+</array>
+```
+
+
+#### Android
+
+In the file `android/app/src/main/AndroidManifest.xml` you must make sure the activity you are going to receive the authentication on has a launchMode value of `singleTask` and that it declares the following intent filter (see the React Native docs for more information):
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data
+        android:host="YOUR_DOMAIN"
+        android:pathPrefix="/android/${applicationId}/callback"
+        android:scheme="${applicationId}" />
+</intent-filter>
+```
+
+#### Configure Callback URLs inside Auth0 Account
+
+A callback URL is a URL in your application where Auth0 redirects the user after they have authenticated.
+
+The callback URL for your app must be added to the Allowed Callback URLs field in your `Application Settings`. If this field is not set, users will be unable to log in to the application and will get an error.
+
+##### iOS callback URL  
+
+
+```
+{PRODUCT_BUNDLE_IDENTIFIER}://YOUR_DOMAIN/ios/{PRODUCT_BUNDLE_IDENTIFIER}/callback
+```
+
+##### Android callback URL  
+
+
+```
+{YOUR_APP_PACKAGE_NAME}://YOUR_DOMAIN/android/{YOUR_APP_PACKAGE_NAME}/callback
+```
+
+#### Configure the workspace 8base account
+
+Having completed the previous steps, we must go to the `workspace` of the 8base account and in `app services -> authentication` create an authentication profile like this:
+
+![rn auth0](media/addAuthProfile.png)
+
+#### Add authentication with Auth0
+
+First, import the `Auth0` module and create a new `Auth0` instance.
+
+```javascript
+import Auth0 from 'react-native-auth0';
+const auth0 = new Auth0({ domain: 'YOUR_DOMAIN', clientId: 'YOUR_CLIENT_ID' });
+
+const loginAuth = () => {
+  auth0
+    .webAuth
+    .authorize({scope: 'openid profile email'})
+    .then(credentials =>
+      // Successfully authenticated
+      // Store the accessToken
+      this.setState({ accessToken: credentials.accessToken })
+    )
+    .catch(error => console.log(error));
+}
+
+const logoutAuth = () => {
+  auth0.webAuth
+    .clearSession({})
+    .then(success => {
+        Alert.alert(
+            'Logged out!'
+        );
+        this.setState({ accessToken: null });
+    })
+    .catch(error => {
+        console.log('Log out cancelled');
+    });
+}
+```
+
+
 ### Additional fields for Auth0 Signup
 
 ## 4. 8base database fields relationship naming
