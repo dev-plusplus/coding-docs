@@ -351,3 +351,15 @@ const signup = (username: string, password: string): User => {
 - Clear documentation helps other developers to quickly understand the purpose of a function, class or sentence.
 - Clear documentation helps maintain and reuse the functions and classes.
 - Clear documentation helps identify bugs easier. 
+
+
+# 5) **Prefer async/await syntax over Promises and callbacks**
+
+Ref: https://github.com/sindresorhus/eslint-plugin-unicorn/issues/652
+
+
+### Justification
+
+- Easier to read and understand to new developers.
+- Manage synchronous flow with asynchronous capabilities. 
+- Conventional preference: Even if both are acceptable solutions, one is preferred over the other one. 
