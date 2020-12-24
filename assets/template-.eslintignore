@@ -1,0 +1,11 @@
+# Nodejs 8base functions
+migrations
+node_modules
+build
+
+
+# React
+node_modules
+build
+public
+apollo.config.js

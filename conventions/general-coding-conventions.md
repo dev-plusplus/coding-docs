@@ -1,30 +1,73 @@
 # General coding conventions
 
-## 1. Applications Starters:
+## 1. Project Conventions:
 
-Application starters to help build the initial boilerplate to develop a project at Cobuild Lab:
+These are the things that every project must have:
 
-* ESLINT configuration
-* Prettier configuration
-* Github Actions for: testing, building and linting
-* Husky + Lint Stageg for pre-commit and pre-push git hooks
-* Jest configuration and example test
-* Cypress configuration and example test (Web applications only)
-* Git ignore file
-* npm ignore file
-* Pull Request Templates
-* Issue Templates
+### ESLINT Configuration
 
-### 1️⃣ 8base React SPA Typescript Application Starter:  
-https://github.com/cobuildlab/create-react-typescript-app
-### 2️⃣ NextJS Typescript Application Starter:  
-`TODO:`
-### 3️⃣ NodeJs Typescript Application Starter:  
-https://github.com/cobuildlab/create-nodejs-app
-### 4️⃣ 8base Typescript cloud functions Starter:  
-`TODO:`
-### 5️⃣ React Native Typescript Starter:  
-https://github.com/cobuildlab/create-react-native-typescript-app
+Every project must have an `eslintrc.js` with the standard configuration that we have decided for the company projects:
+
+- For nodejs applications: [NodeJS ESLint configuration file](../assets/template-nodejs-.eslintrc.js)
+- For React Typescript applications: [React Typescript ESLint configuration file](../assets/template-react-.eslintrc.json)
+- [ESLint Ignore](../assets/template-.eslintignore)
+
+### Prettier Configuration
+
+Every project must have an `.prettierrc.json` with the standard configuration for the prettier formatting:
+
+- For javascript applications: [Prettier configuration file](../assets/template-.prettierrc.json)
+- [Prettier Ignore](../assets/template-.prettierignore)
+
+### Github Actions for: testing, building and linting
+
+Every project must have automatic actions on Pull Requests to the main branches for running linting, building and testing
+
+- For typescript projects: [Github Workflow for Linting, Building and Testing](../assets/github/template-buildd-eslint.yml) 
+
+### Husky + Lint Stageg for pre-commit and pre-push git hooks
+
+Every project must have automatic pre-commit and pre-push actions with `husky` and `lint-stageg` on the package.json:
+
+```json
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "pre-push:": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "prettier --write",
+      "eslint --fix",
+      "npm run build"
+    ]
+  }
+```
+
+### Jest configuration and example test
+
+Every project must have Jest configurated. Frontend or backend automated testing are not a mandatory requirement but a desired feature. 
+
+### Git ignore file
+### npm ignore file
+
+For projects that are published in the npm directory, we needd to exclude certain files and folders of being uploaded with the package:
+
+- .npmignore
+```
+src
+tsconfig.json
+tslint.json
+.prettierrc
+```
+
+### Github Pull Request / Issues Templates
+
+For every project it is required to have the Pull Requests and Issue templates for the Github Platform:
+
+- [Issues Templates](../assets/github/ISSUE_TEMPLATE)
+- [Pull Request Template](../assets/github/pull_request_template.md)
 
 
 ## 2. Naming for Git Environment Branches, Feature Branches, and Pull Requests.
