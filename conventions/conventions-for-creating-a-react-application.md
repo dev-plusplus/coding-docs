@@ -356,11 +356,75 @@ const MyComponent = ()=> {
 ```
 
 
-## 9) Prefer `Session` pattern for managing protected routes instead of `ProtectedRoute` pattern
+## 9) Prefer `Routes` pattern for managing protected routes instead of `Session` pattern
 
-For declarative routers like [React Router](https://reacttraining.com/react-router/) or [React Reach](https://reach.tech/router) prefer a Parent `Session` component that individuals `ProtectedRoute` components.
 
 *PREFER THIS*
+
+```javascript
+
+const Routes = ()=> {
+  const { loading } = useAuth()
+  const loadingToken = useToken()
+
+  useOboardinSteps()
+
+  return (
+    loading || loadingToken ? <Loader /> :
+    (
+      <Provider>
+        <Switch>
+            {/*Public Routes*/}
+            <Route path="/auth" component={AuthCallback} />
+            <ProtectedRoute path="/oboarding" component={OnboardingView} />
+            <ProtectedRoute path="/management" component={ManagementView} roles={['manager']} />
+            <ProtectedRoute path="/reports" component={ReportsView} roles={['manager']} />
+            <ProtectedRoute path="/active-items" component={ActiveItemsView} roles={['manager','agent']} />
+            <ProtectedRoute path="/settings" component={SettingsView} roles={['manager','agent']}  /> 
+        </Switch>
+      </Provider>
+    )  
+  )
+}
+
+const ProtectedRoute = ({roles})=>{
+
+  // this is a posible pattern to handle validations and redirects
+  const user = useUser()
+  // a hook that receives a user and the boolean to know if have to validade de user or redirect to other path
+  useManager(user,roles.include('manager'));
+  useAgent(user,roles.include('agent'));
+  useAdmin(user,roles.include('agent'));
+
+
+
+  // this is other pattern a hook that handle all cases, receives an user and the roles to evaluate
+  // this hook should have a main logic to return isAuthenticated and redirectTo, and aun list of cases to evaluate
+  // On case for Agents, one for manager etc.
+  const user = useUser()
+  const { isAuthenticated , redirectTo } = useUserRoles(user,roles)
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isAuthenticated ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: redirectTo,
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
+  );
+
+}
+```
+
+*AND NOT THIS*
 
 ```javascript
 
@@ -385,31 +449,10 @@ const App = ()=> {
 sddsf}
 ```
 
-*AND NOT THIS*
-
-```javascript
-
-const App = ()=> {
-  return (
-    <Provider>
-        <Switch>
-            {/*Public Routes*/}
-            <Route path="/auth" component={AuthCallback} />
-            {/*Protected Routes*/}
-            <ProtectedRoute path="/management" component={ManagementView} />
-            <ProtectedRoute path="/reports" component={ReportsView} />
-            <ProtectedRoute path="/active-items" component={ActiveItemsView} />
-            <ProtectedRoute path="/settings" component={SettingsView} />
-        </Switch>
-    </Provider>  
-)
-sddsf}
-```
-
 ### Justification:
-
-* Single point of control over a user session over redirects, on-boardings, profile completion, etc 
-* In React the Session component can be used for [Error Boundaries](https://reactjs.org/docs/error-boundaries.html). 
+* Take a full advantage of hook to split logic but keep it readable and scalable.
+* The premise of the `Session` to have one single point of control over redirects sound good but in real case this component gets too big and very hard to mantain. This are some examples [LeadVolt](https://github.com/cobuildlab/lead-volt-web/blob/main/src/shared/components/Session.js), [CollabToGrow](https://github.com/cobuildlab/collabtogrow-client/blob/master/src/shared/components/Session.js), [Photag](https://github.com/cobuildlab/photag-web/blob/main/src/modules/session/Session.tsx)
+* A hook like `useUserRoles` could be used in diferent level not just a a higer level, we can't do that with a `Session`.
 
 
 ## 10) Use shared `Permission` functions to control access to features and business operations:
