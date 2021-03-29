@@ -116,3 +116,26 @@ git checkout -b tests/24-add-tests
 [docs] [master] #11 README
 [fix] [prod] #1 Typos
 ```
+### Versioning
+
+```shell script
+First number.Second number. Third number
+```
+  
+- `First Number`: UI changes, conceptual changes, new, altered or removed features.
+- `Second Number`: Features additions or alterations. Bug fixes and security enhacements (develop stage).
+- `Third Number`: Bug fixes and security enhacements at maintance.    
+ 
+
+
+#### Example
+
+```shell script
+0.0.0
+We have added a new module
+1.0.0
+We have added a field to fill on the onboarding 
+1.1.0
+At the prod, we fix that the user can't fill and empty field that he must.
+1.1.1
+```
