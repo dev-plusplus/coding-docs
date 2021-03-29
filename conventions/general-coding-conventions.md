@@ -103,7 +103,7 @@ git checkout -b tests/24-add-tests
 [Type] [Envrionment] [Issue Number] [Short Description]
 ```
   
-- `Type `: The purpose of the pull requests, it can be: `[fix]`, `[feature]`, `[tests]`, `[migration]`, `[docs]`
+- `Type `: The purpose of the pull requests, it can be: `[fix]`, `[feature]`, `[tests]`, `[migration]`, `[docs]`, `release`
 - `Environment`: The environment target of the Pull Request.
 - `Issue Number`: The github issue number.    
 - `Short Description`: A Short description    
