@@ -104,6 +104,7 @@ git checkout -b tests/24-add-tests
 ```
   
 - `Type `: The purpose of the pull requests, it can be: `[fix]`, `[feature]`, `[tests]`, `[migration]`, `[docs]`, `[release]`
+- `Version`: If it's an environment release, Project Manager can add version.
 - `Environment`: The environment target of the Pull Request.
 - `Issue Number`: The github issue number.    
 - `Short Description`: A Short description    
