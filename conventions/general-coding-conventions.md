@@ -118,19 +118,19 @@ git checkout -b tests/24-add-tests
 ```
 ### Versioning
 
-```shell script
-First number.Second number. Third number
+```
+8.4.9
+[FIRST#].[SECOND#].[THIRD#]
 ```
   
-- `First Number`: Major changes that affects the whole app. Conceptual changes, new, altered or removed features.
-- `Second Number`: Minor changes that don't affect the funtionability of the project. UI changes, features additions or alterations. Bug fixes and security enhacements (develop stage).
-- `Third Number`: Bug fixes and security enhacements at maintance.    
+- `First Number`: Major changes that affects the whole app such as conceptual changes, new, altered or removed features, Comprehensive UI changes.
+- `Second Number`: New features or alterations, changes that don't overwhelmingly alter the funtionality of the project, partial UI Updates, Bug fixes and security enhacements (develop stage).
+- `Third Number`: Bug fixes, UI fixes, security enhacements, mainteance.    
  
-
 
 #### Example
 
-```shell script
+```
 0.0.0
 We have added a new module
 1.0.0
