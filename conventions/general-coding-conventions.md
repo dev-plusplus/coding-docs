@@ -115,7 +115,7 @@ git checkout -b tests/24-add-tests
 [fix] [prod] #1128 Adding 3d Secure support
 [docs] [master] #11 README
 [fix] [prod] #1 Typos
-[release] [v2.0.1] [main -> prod] New onboarding module
+[release] [v2.0.1] [prod <- main] New onboarding module
 ```
 ### Versioning
 ```
