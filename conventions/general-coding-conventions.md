@@ -117,25 +117,20 @@ git checkout -b tests/24-add-tests
 [fix] [prod] #1 Typos
 ```
 ### Versioning
-
 ```
 8.4.9
 [FIRST#].[SECOND#].[THIRD#]
 ```
-  
-- `First Number`: Major changes that affects the whole app such as conceptual changes, new, altered or removed features, Comprehensive UI changes.
-- `Second Number`: New features or alterations, changes that don't overwhelmingly alter the funtionality of the project, partial UI Updates, Bug fixes and security enhacements (develop stage).
-- `Third Number`: Bug fixes, UI fixes, security enhacements, mainteance.    
+| `First Number` | `Second Number` | `Third Number` | 
+|----------------|-----------------|----------------|
+| Major changes that affects the whole app such as conceptual changes, new, altered or removed features or modules, Major UI changes, Comprehensive Releases.| New features or alterations, changes that don't overwhelmingly alter the funtionality of the project, partial UI Updates, Major Bug fixes and security enhacements (dev stage). | Minor Bug fixes, UI fixes, security enhacements, mainteance. |
  
 
 #### Example
 
 ```
-0.0.0
-We have added a new module
-1.0.0
-We have added a field to fill on the onboarding 
-1.1.0
-At the prod, we fix that the user can't fill and empty field that he must.
-1.1.1
+0.0.0 | New Project
+1.0.0 | Release of a brand new onboarding module
+1.1.0 | Added a new credit card feature to the existing onboarding module
+1.1.1 | Hotfix pushed because credit card field was not working correctly
 ```
