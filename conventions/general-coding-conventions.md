@@ -122,8 +122,8 @@ git checkout -b tests/24-add-tests
 First number.Second number. Third number
 ```
   
-- `First Number`: UI changes, conceptual changes, new, altered or removed features.
-- `Second Number`: Features additions or alterations. Bug fixes and security enhacements (develop stage).
+- `First Number`: Major changes that affects the whole app. Conceptual changes, new, altered or removed features.
+- `Second Number`: Minor changes that don't affect the funtionability of the project. UI changes, features additions or alterations. Bug fixes and security enhacements (develop stage).
 - `Third Number`: Bug fixes and security enhacements at maintance.    
  
 
