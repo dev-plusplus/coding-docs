@@ -103,7 +103,8 @@ git checkout -b tests/24-add-tests
 [Type] [Envrionment] [Issue Number] [Short Description]
 ```
   
-- `Type `: The purpose of the pull requests, it can be: `[fix]`, `[feature]`, `[tests]`, `[migration]`, `[docs]`
+- `Type `: The purpose of the pull requests, it can be: `[fix]`, `[feature]`, `[tests]`, `[migration]`, `[docs]`, `[release]`
+- `Version`: If it's an environment release, Project Manager can add version.
 - `Environment`: The environment target of the Pull Request.
 - `Issue Number`: The github issue number.    
 - `Short Description`: A Short description    
@@ -115,4 +116,23 @@ git checkout -b tests/24-add-tests
 [fix] [prod] #1128 Adding 3d Secure support
 [docs] [master] #11 README
 [fix] [prod] #1 Typos
+[release] [v2.0.1] [prod <- main] New onboarding module
+```
+### Versioning
+```
+8.4.9
+[FIRST#].[SECOND#].[THIRD#]
+```
+| `First Number` | `Second Number` | `Third Number` | 
+|----------------|-----------------|----------------|
+| Major changes that affects the whole app such as conceptual changes, new, altered or removed features or modules, Major UI changes, Comprehensive Releases.| New features or alterations, changes that don't overwhelmingly alter the funtionality of the project, partial UI Updates, Major Bug fixes and security enhacements (dev stage). | Minor Bug fixes, UI fixes, security enhacements, mainteance. |
+ 
+
+#### Example
+
+```
+0.0.0 | New Project
+1.0.0 | Release of a brand new onboarding module
+1.1.0 | Added a new credit card feature to the existing onboarding module
+1.1.1 | Hotfix pushed because credit card field was not working correctly
 ```
