@@ -8,6 +8,7 @@
 
 ## [4. Conventions for Javascript / Typescript source code:](./conventions/conventions-for-javascript-typescript-source-code.md)
 
+## [5. 8base conventions](https://github.com/cobuildlab/8base-recipes)
 
 TODO: 
 
