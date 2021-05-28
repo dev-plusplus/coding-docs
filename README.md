@@ -2,13 +2,23 @@
 
 ## [1. General coding conventions:](./conventions/general-coding-conventions.md)
 
+Conventions not directly related to how the code is written.
+
 ## [2. Effective Programming: A guide for conventions and best practices in software development:](./conventions/effective-programming-at-cobuildlab.md)
+
+General conventions to write "effective code".
 
 ## [3. Conventions for creating a React or React Native Application:](./conventions/conventions-for-creating-a-react-application.md)
 
+Conventions specific to React code bases.
+
 ## [4. Conventions for Javascript / Typescript source code:](./conventions/conventions-for-javascript-typescript-source-code.md)
 
+Conventions specific to Javascript / Typescript code bases.
+
 ## [5. 8base conventions](https://github.com/cobuildlab/8base-recipes)
+
+Conventions related to 8base applications
 
 TODO: 
 
