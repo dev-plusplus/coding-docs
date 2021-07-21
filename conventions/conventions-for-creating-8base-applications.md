@@ -311,6 +311,8 @@ TODO:
 
 ## 4. 8base database modeling
 
+As a general rule, we use lower camel case for naming any field in the database. 
+
 ### General Rules
 
 - Do not use multiple fields for attributes, these are not searchable yet (Dec, 2020)
