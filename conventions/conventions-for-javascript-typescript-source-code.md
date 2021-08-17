@@ -1,11 +1,3 @@
----
-title: "Conventions for Javascript / Typescript source code"
-date: '2021-12-31'
-tags: ['javascript', "Conventions", "conventions"]
-description: This document aims to reduce the friction between patterns and ways of doing common tasks during the development of Javascript applications.
-cover: "../../assets/default-blog/default-post.jpg"
----
-
 This document aims to reduce the friction between patterns and ways of doing common tasks during the development of Javascript applications.
 
 This document is heavily based on the Convention proposed by [Airbnb](https://github.com/airbnb/javascript), [StandardJs](https://standardjs.com/) and our own experience developing front end javascript applications since 2008 and React Applications since late 2016.
