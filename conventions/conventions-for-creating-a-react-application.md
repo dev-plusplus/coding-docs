@@ -493,6 +493,43 @@ export const validateProject = (user:User, project:Project): void  => {
 }; 
 ```
 
+## 12) Use Role based code splitting
+
+### Create a intermediate file which transfrom component views to lazy components
+```tsx
+import { lazy } from 'react';
+
+export const HomeLazy = lazy(() =>
+  import('../home/Home').then((module) => ({ default: module.Home })),
+);
+
+export const AboutLazy = lazy(() =>
+  import('../home/About').then((module) => ({ default: module.About })),
+);
+```
+In order to allow tree shaking to work, the files `../home/Home` and `../home/About` need to only the export `Home` and `About`
+
+### Use the `ComponentsLazy` with `Suspense`
+
+```tsx
+
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HomeLazy, AboutLazy } from './lazy-routes';
+
+const App = () => (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={HomeLazy}/>
+        <Route path="/about" component={AboutLazy}/>
+      </Switch>
+    </Suspense>
+  </Router>
+);
+```
+
+
 
 TODO:  
 - YUP + hook react form
