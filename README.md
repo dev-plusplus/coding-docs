@@ -46,4 +46,4 @@ TODO:
 - YUP + hook react form
 - ROLE BASED COMPONENTS: donde decidir que cargar (Donde poner el IF)
 - Custom Hooks vs React simple state: Events vs Providers
-- 8base: NO skip permission un less that you are on resolvers
+- 8base: NO skip permission un less that you Amplify debugging
