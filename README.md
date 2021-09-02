@@ -47,3 +47,4 @@ TODO:
 - ROLE BASED COMPONENTS: donde decidir que cargar (Donde poner el IF)
 - Custom Hooks vs React simple state: Events vs Providers
 - 8base: NO skip permission un less that you Amplify debugging
+- TODO VIDEOS> Ampify, Feature Branch, Pull Requests
