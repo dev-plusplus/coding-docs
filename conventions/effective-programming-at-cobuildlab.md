@@ -61,7 +61,7 @@ Multi sentence try catch blocks are **ineffective** because:
 Keep your code predictable, robust, solid and **effective** by:
 
 - For readability and robustness keep your try/catch blocks limited to 1 sentence
-- Use specific Exceptions subclasses and not broads classes or definitions to prevent unknown scenarios to behave like know scenarios
+- Use specific Exceptions subclasses and not broads classes or definitions to prevent unknown scenarios to behave like known scenarios
 - For easier bug hunting, make sure to handle different Exceptional scenarios appropriately  
 
 
