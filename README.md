@@ -1,5 +1,13 @@
 # [Cobuild](https://cobuildlab.com) Lab Coding Conventions
 
+### Preferred Tooling:
+
+1. Typescript and Python
+2. ReactJs and React Native
+3. 8base and AWS
+4. GitHub, Buddy Works, and Slack
+5. ESLINT and Husky
+
 ## 0. General Product conventions:
 
 ### **Feature Flags** for isolating features in the system
