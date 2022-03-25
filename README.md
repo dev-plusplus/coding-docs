@@ -47,12 +47,5 @@ Conventions specific to Javascript / Typescript code bases.
 
 Conventions related to 8base applications
 
-TODO: 
 
-## 5. Git branches strategy for environments deployment on web applications: (TODO)
-
-- YUP + hook react form
-- ROLE BASED COMPONENTS: donde decidir que cargar (Donde poner el IF)
-- Custom Hooks vs React simple state: Events vs Providers
-- 8base: NO skip permission un less that you Amplify debugging
-- TODO VIDEOS> Ampify, Feature Branch, Pull Requests
+## 6. And dozens of pending things... [HERE](https://github.com/cobuildlab/coding-docs/issues)
