@@ -309,38 +309,6 @@ const logoutAuth = () => {
 
 TODO:
 
-## 4. 8base database modeling
 
-As a general rule, we use lower camel case for naming any field in the database. 
-
-### General Rules
-
-- Do not use multiple fields for attributes, these are not searchable yet (Dec, 2020)
-- Do not use Many to Many relationships, use a separate table always. This make the application easier to be modified
-- Use Mandatory fields for relationships where it is required a cascade effect. Mandatory fields force the data to be erased when the related object is deleted
-
-### Naming relationships: 
-
-8base allow naming reverse relationship fields, and for that, we have a convention:
-
-#### For the Many to One relation:
-
-- For the reference field: `<Entity Name>`
-- For the reverse relationship field: `<Entity Name><Related Table Name>Relation`
-
-Example: Given EntityA and EntityB as Tables, a field on EntityA, that makes a reference to EntityB, must be called:
-
-- `entityB` for the reference
-- `entityBEntityARelation` for the reverse reference
-
-#### For the One to One relation
-
-- For the reference field: `<Entity Name>`
-- For the reverse relationship field: `<Entity Name>`
-
-Example: Given EntityA and EntityB as Tables, a field on EntityA, that makes a reference to EntityB, must be called:
-
-- `entityB` for the reference
-- `entityA` for the reverse reference
 
 ## 5. Deleting heavy objects (Objecct with lots of relationships)
