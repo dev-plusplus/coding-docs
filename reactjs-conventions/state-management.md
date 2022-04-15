@@ -43,42 +43,31 @@ export function JobCreateView(): JSX.Element {
 
 ```typescript
 
-// hooks.ts
-export function useCustomCreateCustomerMutation({onCompleted: <>, onUpdate: <>, onError: <>}): JSX.Element {
-  
-  const mutate = useCallback(()=>{
-    // Manage complex transformations, mapping or filerts
-    // Example: 8base disconnects
-  });
-  
-  const [createCustomer, { loading, error }] = useCreateCustomerMutation({
-    /**
-     * @returns {void} - Result.
-     */
-    onCompleted: () => {
-      if (error === undefined) {
-        snackbar.success('Customer created');
-        history.push('/customers');
-      } else {
-        setOpen(true);
-      }
-    },
-
-    /**
-     * @param cache - Cache.
-     * @returns Void.
-     */
-    update: (cache) =>
-      clearQuerysFromCache([
-        'customersList',
-        'customer',
-        'address',
-        'addressesList',
-      ])(cache),
-  });
-  
-  return [mutate, createCustomer, loading, error]
+// utils.ts
+export function normalizeCustomer(customer:Customer): Customer {
+  const normalizedCustomer:Customer = {};
+  // Manage complex transformations or mapping
+  // Example: 8base disconnects
+  return normalizedCustomer
 }
+
+export const treeFilter: TreeFilterType = ({
+  propertyId,
+  treeSpecieId,
+  text,
+}) => {
+  const resp = {
+    property: propertyId
+      ? { id: { equals: propertyId } }
+      : { customer: { id: { equals: clientIdEvent.get() } } },
+    treeSpecie: (treeSpecieId || text) && {
+      id: { equals: treeSpecieId },
+      name: { contains: text },
+    },
+  } as TreeFilter;
+
+  return resp;
+};
 
 export function JobCreateView(): JSX.Element {
     //...
@@ -88,8 +77,43 @@ export function JobCreateView(): JSX.Element {
     onError: ()=> {}
   });
   // ...
+  // 
+
+  const filter = { ...treeFilter(treeFilterObject), archived: { is_empty: true } };
+  // vs
+  const filter = useMemo(  () => {
+    return { ...treeFilter(treeFilterObject), archived: { is_empty: true } };
+  }, [treeFilterObject] );
+  
+  const [getTree] = useGetTreeLazyQuery({
+    variables: {
+      filter,
+    },
+    onCompleted: (res) => setTrees(res.treesList.items as Tree[]),
+  });
+  
+  
+  return (
+    // ...Mutation
+    <Button onClick={() => {
+        const normalizedCustomer = normalizeCustomer(customer);
+        createCustomer(normalizedCustomer);
+      }
+    } />
+    // ...Query
+    <Button onClick={() => {
+        const filter = treeFilter(tree, page, otherFilter);
+        fetchCustomers(filter);
+      }
+    } />
+    // ...
+  );
 }
 ```
+
+1.1. Query before components get rendered
+1.2. Query after the components get rendered
+1.3. query for Callbacks on events
 
 ## USE CASE 2: Event propagation / notification
 ## USE CASE 3: GLOBAL STATE: Share state between components 
