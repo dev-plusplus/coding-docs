@@ -10,8 +10,8 @@ For easy state management: local and global, we have developed a simple state ma
 
 - For Graphql mutations and queries than do not need to load initial data, or communicate events, the prefered method to execute this type of functions and act on it is by using the generated hooks from: https://www.graphql-code-generator.com/ Generated hooks work well with Typescript, genrating types based on the Graphql schema.
 
-(TODO)
-  See: [HOW TO ]()
+
+  See: [HOW TO: The Graphql Code Generator ](./how-tos/graphql.md)
 
 **EXAMPLE**
 
@@ -38,7 +38,7 @@ export function JobCreateView(): JSX.Element {
 
 ```
   
-- In the case of data validation, data preparation, filters and in general, treatment that needs to be done to inputs or outputs, an external utility function must be implemented.
+- In the case of data validation, data normalization, filters and in general, treatment that needs to be done to inputs or outputs, an external utility function must be implemented.
 
 
 ```typescript
