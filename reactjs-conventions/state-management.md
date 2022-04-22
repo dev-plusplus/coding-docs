@@ -4,14 +4,13 @@
 For easy state management: local and global, we have developed a simple state management library: https://github.com/cobuildlab/react-simple-state
 
 ## GENERAL BEST PRACTICES:
-- 
 
 ## USE CASE 1: Graphql API: mutations and queries (not for initial data loading)
 
 - For Graphql mutations and queries than do not need to load initial data, or communicate events, the prefered method to execute this type of functions and act on it is by using the generated hooks from: https://www.graphql-code-generator.com/ Generated hooks work well with Typescript, genrating types based on the Graphql schema.
 
 
-  See: [HOW TO: The Graphql Code Generator ](./how-tos/graphql.md)
+  See: [HOW TO: The Graphql Code Generator ](../how-tos/graphql.md)
 
 **EXAMPLE**
 
