@@ -5,6 +5,9 @@ For easy state management: local and global, we have developed a simple state ma
 
 ## GENERAL BEST PRACTICES:
 
+- Be Lazy always, until you don't need to
+- Use caching tools
+
 ## USE CASE 1: Graphql API: mutations and queries (not for initial data loading)
 
 - For Graphql mutations and queries than do not need to load initial data, or communicate events, the prefered method to execute this type of functions and act on it is by using the generated hooks from: https://www.graphql-code-generator.com/ Generated hooks work well with Typescript, genrating types based on the Graphql schema.
@@ -101,20 +104,90 @@ export function JobCreateView(): JSX.Element {
 }
 ```
 
-## USE CASE 2: Initial Data:
+## USE CASE 2: Initial Local Data on components:
 
-1.1. Query before components get rendered
-1.2. Query after the components get rendered
-1.3. query for Callbacks on events
+Query initial Data from an API with Graphql, REST or an SDK.
 
+- For Graphql queries with Apollo: we prefer to use the generated `useQuery` directly on the component and not on an `useEffect`. For lazy dependencies we can use the `skip` parameter to avoid executing the query before we have a lazy value.
 
-## USE CASE 4: REST API: Share state between components
+```typescript
+export function JobListView(): JSX.Element {
+  const {query:{id}, ready} = useParam({});
+  const {loading, error, data, refetch } = useGetCustomerQuery({variables:{id}, skip:ready});
+  ....
+}
+```
 
-## USE CASE 2: Event propagation / notification
-## USE CASE 3: GLOBAL STATE: Share state between components 
+- For REST APIs and SDK Promises: we prefer to use the action structure with the [React Simple State](https://github.com/cobuildlab/react-simple-state#5-fetch-can-be-done-with-usefetchaction-hook) library:
 
+```typescript
+const OnSuccess = createEvent<number[]>();
+const OnError = createEvent<Error>();
+const action = createAction(OnSuccess, OnError ()=> {
+  // Call an API or a Promise
+});
+
+export function JobListView(): JSX.Element {
+  const {query:{id}, ready} = useParam({});
+  const [loading, error, data, refetch] = useFetchAction(action, {variables:{id}, skip:ready});
+  ....
+}
+
+```
+
+## USE CASE 3: Event propagation / notification
+## USE CASE 4: GLOBAL STATE: Shared state between components (siblings or long relationships)
 ## USE CASE 5: LOCAL STATE: props, state and children state (prop drilling)
-## USE CASE 6: Forms
-## USE CASE 7: Persist state on Session or Local Storage
+## USE CASE 6: Complex local state objects: 
+- 
+```typescript
+export default function App() {
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<{
+    autocomplete: NestedValue<Option[]>;
+    select: NestedValue<number[]>;
+  }>({
+    defaultValues: { autocomplete: [], select: [] },
+  });
+  const onSubmit = handleSubmit((data) => console.log(data));
+
+  React.useEffect(() => {
+    register('autocomplete', {
+      validate: (value) => value.length || 'This is required.',
+    });
+    register('select', {
+      validate: (value) => value.length || 'This is required.',
+    });
+  }, [register]);
+
+  return (
+    <form onSubmit={onSubmit}>
+      <Autocomplete
+        options={options}
+        getOptionLabel={(option: Option) => option.label}
+        onChange={(e, options) => setValue('autocomplete', options)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            error={Boolean(errors?.autocomplete)}
+            helperText={errors?.autocomplete?.message}
+          />
+        )}
+      />
+
+      <Select value="" onChange={(e) => setValue('muiSelect', e.target.value as number[])}>
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+      </Select>
+
+      <input type="submit" />
+    </form>
+  );
+}
+```
+
+
+
+## USE CASE 7: Forms
+## USE CASE 8: Persist state on Session or Local Storage
 
 ## TODOs:
