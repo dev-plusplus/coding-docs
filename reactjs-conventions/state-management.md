@@ -103,7 +103,7 @@ export function JobCreateView(): JSX.Element {
   );
 }
 ```
-## USE CASE 2: REST API and Web Services (not for initial data loading)
+## USE CASE 2: REST API and Web Services: for initial data loading and based on user events
 
 The prefered way of performing requests to REST APIs or Web Services is to use the State Library and the actions tooling or the `usePromise` of the Hooks Library 
 
@@ -209,42 +209,21 @@ const AgencyView = ()=> {
 
 ```
 
-## USE CASE 3: Initial Data Loading (External APIs: Grapqhl, REST or Web Services)
-## USE CASE 4: Initial Local State on components:
+## USE CASE 3: GLOBAL STATE: Shared state between components (siblings or long relationships) 
 
-Query initial Data from an API with Graphql, REST or an SDK.
+For use cases when is necesary to share data between components that are is not a parent or a children, examples:
 
-- For Graphql queries with Apollo: we prefer to use the generated `useQuery` directly on the component and not on an `useEffect`. For lazy dependencies we can use the `skip` parameter to avoid executing the query before we have a lazy value.
+- Reading state from grandchildren 
+- Reading state from global components like Routes, Theme and/or Session (Getting the current logged user)
+- Share state between siblings
+- Trigger state change on siblings
 
-```typescript
-export function JobListView(): JSX.Element {
-  const {query:{id}, ready} = useParam({});
-  const {loading, error, data, refetch } = useGetCustomerQuery({variables:{id}, skip:ready});
-  ....
-}
-```
+Alternatives:
+Context / hooks / Events
 
-- For REST APIs and SDK Promises: we prefer to use the action structure with the [React Simple State](https://github.com/cobuildlab/react-simple-state#5-fetch-can-be-done-with-usefetchaction-hook) library:
+## USE CASE 4: LOCAL STATE: props, state and children/parent state (prop drilling)
+## USE CASE 5: Complex local state objects: 
 
-```typescript
-const OnSuccess = createEvent<number[]>();
-const OnError = createEvent<Error>();
-const action = createAction(OnSuccess, OnError ()=> {
-  // Call an API or a Promise
-});
-
-export function JobListView(): JSX.Element {
-  const {query:{id}, ready} = useParam({});
-  const [loading, error, data, refetch] = useFetchAction(action, {variables:{id}, skip:ready});
-  ....
-}
-
-```
-
-## USE CASE 5: Event propagation / bradcasting
-## USE CASE 6: GLOBAL STATE: Shared state between components (siblings or long relationships)
-## USE CASE 7: LOCAL STATE: props, state and children state (prop drilling)
-## USE CASE 8: Complex local state objects: 
 - 
 ```typescript
 export default function App() {
@@ -291,9 +270,5 @@ export default function App() {
 }
 ```
 
-
-
-## USE CASE 7: Forms
-## USE CASE 8: Persisted state on Session or Local Storage
-
-## TODOs:
+## USE CASE 6: Forms
+## USE CASE 7: Persisted state on Session or Local Storage
