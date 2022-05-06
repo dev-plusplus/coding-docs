@@ -103,8 +103,114 @@ export function JobCreateView(): JSX.Element {
   );
 }
 ```
+## USE CASE 2: REST API and Web Services (not for initial data loading)
 
-## USE CASE 2: Initial Local Data on components:
+The prefered way of performing requests to REST APIs or Web Services is to use the State Library and the actions tooling or the `usePromise` of the Hooks Library 
+
+Ref: React Simple State: https://github.com/cobuildlab/react-simple-state#4-actions-can-be-created-with-createaction-helper
+Ref: Hooks Utils: https://github.com/cobuildlab/hooks-utils
+
+- `useCallAction` for performing requests based on users events
+- `useFetchAction` to perform requests when the component mounts or the deps change
+- `usePromise` for perfoming requests both autimatically or in response to a user event
+
+
+```js
+import { createAction } from '@cobuildlab/react-simple-state';
+import { OnFecthUserEvent, OnFetchUserErrorEvent } from './events';
+import { apiClient } from './api';
+
+// single declarition of the async service and the action
+export const fetchUserAction = createAction(
+  OnFecthUserEvent,
+  OnFetchUserErrorEvent,
+  async (id) => {
+    const user = await apiClient.fetch({ user: id });
+
+    return user;
+  },
+);
+
+// Or we could declare the async service and then use in with diferent actions
+
+export const fetchUserService = async (id) => {
+  const user = await apiClient.fetch({ user: id });
+  return user;
+};
+
+export const fetchMainUserAction = createAction(
+  OnFecthMainUserEvent,
+  OnFetchMainUserErrorEvent,
+  fetchUserService,
+);
+export const fetchSecondaryUserAction = createAction(
+  OnFecthSecondaryUserEvent,
+  OnFetchSecondaryUserErrorEvent,
+  fetchUserService,
+);
+
+export const UserProfile = ({ userId }) => {
+  const userData = userDataState;
+  const [user, loadingUser] = useFetchAction(fetchUser, [userId]);
+  const [user, loadingUser, { refetch }] = useFetchAction(fetchUser, [userId], {
+    onCompleted: () => {
+      toast.success('user fetched');
+    },
+    onError: () => {
+      toast.error('Error when fetching user');
+    },
+  });
+  
+  const [save, loadingSubmit] = useCallAction(saveUser);
+  // OR...
+
+  // setup the action, and return a function that will trigger the action when it needed.
+  const [save, loadingSubmit] = useCallAction(saveUser, {
+    onCompleted: () => {
+      toast.success('user saved');
+    },
+    onError: () => {
+      toast.error('Error when saving user');
+    },
+  });
+
+  return (
+    <Form>
+      <SubmitButton onClick={() => save(userId, useCallAction)} />
+    </Form>
+  );
+};
+
+import { useCallback } from "react";
+import { usePromise } from "@cobuildlab/hooks-utils";
+import { fetchAgencies, fetchRoles } from "./agency-actions.js"
+
+const AgencyView = ()=> {
+  // NOTE: be aware that we using the same names for the error keys returned by the hook
+  // This is just for keep the example simplest as posible
+  const [agencies, loadingAgencies,  {error, call: fetchAgencies()} ] = usePromise(fetchAgencies);
+  const [roles, loadingRoles, {error, call: fetchRoles()} ] = usePromise(()=>fetchRoles(agency), {
+    onCmplete: (response)=>{
+      console.log(response) // Roles response
+    },
+    onError: (error)=>{
+      console.log(error) // Handle Error
+    },
+  });
+
+  const fetchData = useCallback(() => {
+    // Do something
+    fetchRoles();
+    fetchAgencies();
+  });
+
+  return ();
+}
+
+```
+
+## USE CASE 3: Initial Data Loading (External APIs: Grapqhl, REST or Web Services)
+## USE CASE 4: Initial Local State on components:
 
 Query initial Data from an API with Graphql, REST or an SDK.
 
@@ -135,10 +241,10 @@ export function JobListView(): JSX.Element {
 
 ```
 
-## USE CASE 3: Event propagation / notification
-## USE CASE 4: GLOBAL STATE: Shared state between components (siblings or long relationships)
-## USE CASE 5: LOCAL STATE: props, state and children state (prop drilling)
-## USE CASE 6: Complex local state objects: 
+## USE CASE 5: Event propagation / bradcasting
+## USE CASE 6: GLOBAL STATE: Shared state between components (siblings or long relationships)
+## USE CASE 7: LOCAL STATE: props, state and children state (prop drilling)
+## USE CASE 8: Complex local state objects: 
 - 
 ```typescript
 export default function App() {
@@ -188,6 +294,6 @@ export default function App() {
 
 
 ## USE CASE 7: Forms
-## USE CASE 8: Persist state on Session or Local Storage
+## USE CASE 8: Persisted state on Session or Local Storage
 
 ## TODOs:
