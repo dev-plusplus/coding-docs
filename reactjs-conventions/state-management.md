@@ -213,16 +213,69 @@ const AgencyView = ()=> {
 
 For use cases when is necesary to share data between components that are is not a parent or a children, examples:
 
-- Reading state from grandchildren 
-- Reading state from global components like Routes, Theme and/or Session (Getting the current logged user)
-- Share state between siblings
-- Trigger state change on siblings
+### 3.1 Reading state from grand parents (Ex. Theme, Session, Routes, etc)
 
-Alternatives:
-Context / hooks / Events
+For reading global state that is likely to not to change frequently (not to trigger re-renders) we can use the [Context API](https://reactjs.org/docs/context.html)
 
-## USE CASE 4: LOCAL STATE: props, state and children/parent state (prop drilling)
-## USE CASE 5: Complex local state objects: 
+```js
+function App(): JSX.Element {
+  return (
+    <BrowserRouter>
+      <Auth0ProviderWithHistory>
+        <ApolloProvider>
+          <ThemeProvider theme={theme}>
+            <Routes />
+          </ThemeProvider>
+        </ApolloProvider>
+      </Auth0ProviderWithHistory>
+    </BrowserRouter>
+  );
+}
+```
+
+### 3.2 Share state between components that are unrelated directly: siblings, grand children
+
+For reading and sharing state the preferred way is to use the Events and Subscription API proposed on the [React Simple State Library](https://github.com/cobuildlab/react-simple-state)
+
+Optionally, this events and subscriptions can be wrapped into custom hooks. 
+
+```javascript
+const useSelectedCompany = () => {
+  const [company, setCompany] = useState(null);
+  useSubscription((company) => setCompany(company));
+  return [company, setCompany];
+}
+
+const useSelectedProject = () => {
+  const [project, setProject] = useEvent(ProjectEvent);
+  return [project,setProject];
+}
+const ProjectSettingsView = ()=>{
+  const [company,setCompany] = useSelectedCompany();
+  const [project,setProject] = useSelectProject();
+
+  return (
+    <>
+      <h1></h1>
+    </>
+  );
+}
+```
+
+### 3.3 Remote State and Trigger state change (events) on siblings or grand parents and grand children
+
+**#### Graphql**
+
+Based on the architecture for the [3factor.app](https://3factor.app/), the preferred way to listen to and react to events that change data on the system is to use [Grapqhl Subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/)
+ 
+**### REST**
+
+There is no standard for trigger changes for Remote state yet. (TODO)
+
+For trigger events locally the preferred way is to use the Events and Subscription API proposed on the [React Simple State Library](https://github.com/cobuildlab/react-simple-state)
+
+
+## USE CASE 4: Complex local state objects: 
 
 - 
 ```typescript
@@ -270,5 +323,5 @@ export default function App() {
 }
 ```
 
-## USE CASE 6: Forms
-## USE CASE 7: Persisted state on Session or Local Storage
+## USE CASE 5: Forms
+## USE CASE 6: Persisted state on Session or Local Storage or Cookies
