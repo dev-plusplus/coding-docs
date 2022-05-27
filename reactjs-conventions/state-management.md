@@ -270,58 +270,31 @@ Based on the architecture for the [3factor.app](https://3factor.app/), the prefe
  
 **### REST**
 
-There is no standard for trigger changes for Remote state yet. (TODO)
+There is no standard for trigger changes for Remote state yet. Similar solution can be found here:
+
+- https://www.apollographql.com/docs/react/api/link/apollo-link-rest/
+- https://react-query.tanstack.com/ 
+- https://swr.vercel.app/docs/advanced/cache
 
 For trigger events locally the preferred way is to use the Events and Subscription API proposed on the [React Simple State Library](https://github.com/cobuildlab/react-simple-state)
 
-
 ## USE CASE 4: Complex local state objects: 
 
-- 
-```typescript
-export default function App() {
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<{
-    autocomplete: NestedValue<Option[]>;
-    select: NestedValue<number[]>;
-  }>({
-    defaultValues: { autocomplete: [], select: [] },
-  });
-  const onSubmit = handleSubmit((data) => console.log(data));
+- Busines Objects should be managed using forms with the [React Hook Forms library](https://react-hook-form.com/)
+- Other complex states, that combine variables and callbacks are suggested to be managed independently with the `useState` hook
+- Other variations of complex states are still to be reviewed to suggest best practices and conventions
 
-  React.useEffect(() => {
-    register('autocomplete', {
-      validate: (value) => value.length || 'This is required.',
-    });
-    register('select', {
-      validate: (value) => value.length || 'This is required.',
-    });
-  }, [register]);
 
-  return (
-    <form onSubmit={onSubmit}>
-      <Autocomplete
-        options={options}
-        getOptionLabel={(option: Option) => option.label}
-        onChange={(e, options) => setValue('autocomplete', options)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            error={Boolean(errors?.autocomplete)}
-            helperText={errors?.autocomplete?.message}
-          />
-        )}
-      />
-
-      <Select value="" onChange={(e) => setValue('muiSelect', e.target.value as number[])}>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-      </Select>
-
-      <input type="submit" />
-    </form>
-  );
-}
-```
-
-## USE CASE 5: Forms
 ## USE CASE 6: Persisted state on Session or Local Storage or Cookies
+
+Sometimes is is required to persist data from the server or extenal services. For this we have implemented multiple solutions with any clear patterns, but some solutions are:
+
+### 6.1 Reading / storing data from Persisted Storage
+- https://github.com/apollographql/apollo-cache-persist
+
+### 6.2 Batching change data operations: Mutations, Updates, Creates, etc
+- https://www.npmjs.com/package/@wora/apollo-offline
+
+### 6.3 Session data
+
+- Pending discussion to evalute what data if any is safe to store on a Persisted Storage
