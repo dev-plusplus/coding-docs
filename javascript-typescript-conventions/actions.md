@@ -1,5 +1,7 @@
 An ACTION is an architectural element for Frontend applications. Not to be confused with elements of Backend applications such as `handlers`, `controllers`, `routers` or `services` 
 
+Given the special of modifying data of the actions, things like composition can only be achieved on parts of the action and not the action itself.
+
 ## Definition:
 
 An action is a function that modifies the state of an application.  An action can be seen as the abstraction of CRUD operations on a Front end Application.
