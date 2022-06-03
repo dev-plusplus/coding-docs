@@ -69,8 +69,10 @@ A more advanced variation of the previous scenario exists, where each Tenant on 
 
 ### Policies or Attirbutes
 
-So far we have reviewed 
+So far we have reviewed access control based on Role or Permission, the decision that the system has to take to whether allow a User to perform an action is based on whether it has a Role or not, or has a Permission or not.
 
-A Policy is an advance rule that decides whether a User can perform an action or not. In the previous scenarios we simply decide whether a user can perform an action or not, based on whether he has a Permission or not, a policy extend this, usually with code.
+ a policy extend this, usually with code.
+
+A Policy is an advance rule that decides whether a User can perform an action or not. In the previous scenarios we simply decide whether a user can perform an action or not, based on whether he has a Permission or not, 
 
 A Policy or rule includes this code and possibly metadata to take the decision of allowing or not the user to have 
