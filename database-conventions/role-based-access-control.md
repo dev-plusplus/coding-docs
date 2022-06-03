@@ -71,8 +71,9 @@ A more advanced variation of the previous scenario exists, where each Tenant on 
 
 So far we have reviewed access control based on Role or Permission, the decision that the system has to take to whether allow a User to perform an action is based on whether it has a Role or not, or has a Permission or not.
 
- a policy extend this, usually with code.
+Policy and Attributes based access control extend this approach:
 
-A Policy is an advance rule that decides whether a User can perform an action or not. In the previous scenarios we simply decide whether a user can perform an action or not, based on whether he has a Permission or not, 
+- Policy, usually with code there is an advance decision making into a user can perform an action or not. For example, a policy can allow a user approve a purchase only on week days. 
+- Attributes, this type of logic is based in comparing attributes that an User has with a provided value, and a provide comparision operator. For example, a User can create another User, if the new User will belong to the same Department.
 
-A Policy or rule includes this code and possibly metadata to take the decision of allowing or not the user to have 
+In either case, this document will not cover how to implement this 2 types of access control system
