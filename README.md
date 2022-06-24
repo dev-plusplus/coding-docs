@@ -2,11 +2,13 @@
 
 ### Preferred Tooling:
 
-1. Typescript and Python
-2. ReactJs and React Native
-3. 8base and AWS
-4. GitHub, Buddy Works, and Slack
-5. ESLINT and Husky
+1. Languages: Typescript and Python
+2. Frontend Frameworks: ReactJs and React Native
+3. Backend Frameworks: 8base, Supabase, Hasura and AWS
+4. Devops: GitHub, Buddy Works, and Slack
+5. Code Quality: ESLINT and Husky
+6. Libraries
+    * Logging: https://github.com/cobuildlab/pure-logger
 
 ## 0. General Product conventions:
 
