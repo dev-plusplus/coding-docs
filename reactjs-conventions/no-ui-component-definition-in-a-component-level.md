@@ -1,20 +1,12 @@
-## **No text or font properties in a Component Level**
+## **No UI components definition in a Component Level**
 
-Text or Font properties: CSS properties that modify the look and feel of text.
+UI, or look and feel properties, are CSS properties that modify how an element is drawn in the user interface.
 
-Avoid using styling text or font properties, such as: 
+Avoid using UI properties, or defining UI components directly in Views.
 
-- `font-size`
-- `font-family`
-- `line-height`
-- `etc...`
+[Reference](./separate-layout-components-from-ui-components.md)
 
-for Components in Views to reduce visual noise, unless it is completely necessary.
-
-Rely on abstractions for defining styles for your text components.
-
-See: [Proxy Pattern](https://cobuildlab.com/development-blog/react-patterns-proxy-pattern-for-components/)
-
+Rely on abstractions for UI components, and place those components on `shared` folders. 
 
 *PREFER THIS:*
 
@@ -75,27 +67,3 @@ export class View extends Component {
 * Increase component readability
 * Increase speed of development avoiding design decisions
 * Maintainability by isolation of the styling options
-
-## **3) Separate LAYOUT Components from UI Components**
-
-Avoid mixing in components layout properties with look and feel properties unless is strictly necessary.
-
-*PREFER THIS:*
-
-```javascript 1.8
-const View = () => {
-    return (<div className='float-right'>
-              <OptionButton text='Create' onClick='' icon='new' />
-          </div>);
-};
-```
-
-*AND NOT THIS:*
-```javascript 1.8
-const View = () => {
-    return (
-          <Button onClick={this.goToImportDeals} style={{ position: 'absolute', right: '0px' }}>
-                Import Deals
-          </Button>);
-};
-```
