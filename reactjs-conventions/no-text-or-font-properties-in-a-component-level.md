@@ -1,0 +1,101 @@
+## **No text or font properties in a Component Level**
+
+Text or Font properties: CSS properties that modify the look and feel of text.
+
+Avoid using styling text or font properties, such as: 
+
+- `font-size`
+- `font-family`
+- `line-height`
+- `etc...`
+
+for Components in Views to reduce visual noise, unless it is completely necessary.
+
+Rely on abstractions for defining styles for your text components.
+
+See: [Proxy Pattern](https://cobuildlab.com/development-blog/react-patterns-proxy-pattern-for-components/)
+
+
+*PREFER THIS:*
+
+```javascript
+const NormalText = ({children}) => (
+    <p className='blue-text'>
+        {children}
+    </p>
+);
+
+const H1 = ({children, icon}) => (
+    <div className='inline-block'>
+        <h1 className='header-note'>
+            {children}
+            <span class='icon-header-note'>
+                <img src={icon} />
+            </span> 
+        </h1>
+    </div>
+);
+
+export class View extends Component {
+    render(){
+        <section>
+            <H1 icon={plus}>Note Header</H1>
+            <NormalText>Note Text</NormalText>
+        </section>
+    }
+}
+...
+```
+
+*AND NOT THIS:*
+
+```javascript
+export class View extends Component {
+    render(){
+        <section>
+            <div className='inline-block'>
+                <h1 className='header-note'>
+                    Note Header
+                    <span class='icon-header-note'>
+                        <img src={plus} />
+                    </span> 
+                </h1>
+            </div>
+        <p className='blue-text'>
+            Note Text
+        </p>
+        </section>
+    }
+}
+...
+```
+### Justification:
+
+* Reduce Visual Noise
+* Increase component readability
+* Increase speed of development avoiding design decisions
+* Maintainability by isolation of the styling options
+
+## **3) Separate LAYOUT Components from UI Components**
+
+Avoid mixing in components layout properties with look and feel properties unless is strictly necessary.
+
+*PREFER THIS:*
+
+```javascript 1.8
+const View = () => {
+    return (<div className='float-right'>
+              <OptionButton text='Create' onClick='' icon='new' />
+          </div>);
+};
+```
+
+*AND NOT THIS:*
+```javascript 1.8
+const View = () => {
+    return (
+          <Button onClick={this.goToImportDeals} style={{ position: 'absolute', right: '0px' }}>
+                Import Deals
+          </Button>);
+};
+```
