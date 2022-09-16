@@ -7,7 +7,7 @@ This is an alternative to the conventional try/catch block.
 
 ### Don't Do
 
-```
+```js
 let result;
 try {
  result = await action();
@@ -20,7 +20,7 @@ try {
 ### Do Instead:
 
 
-```
+```js
 import {tryCatch, tryCatchSync} from "@cobuildlab/error-handling";
 
 // Async code
