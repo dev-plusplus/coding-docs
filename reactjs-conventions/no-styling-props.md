@@ -70,3 +70,4 @@ export class View extends Component {
 ### Exceptions:
 
 * Layout Components: Components that are in charge of "where" does an element gets render instead of a Presentation Component, that is in charge on "how" an element looks and feel
+* Layout properties: Properties related to positioning and sizing
