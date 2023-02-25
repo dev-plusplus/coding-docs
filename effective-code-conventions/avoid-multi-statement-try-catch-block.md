@@ -2,7 +2,7 @@
 
 Is a common mistake for new developers to surround long function calls or views inside try-catch blocks as a failsafe or catch all exception handling. But in fact, this is one sign of ineffective code.
 
-### DON'T: Multi sentence try catch blocks are **ineffective** because:
+### DON'T
 
 ```js
 try{
@@ -19,10 +19,7 @@ try{
 - Promote a bad pattern of handling all exceptions in the same way. This is not always the case, and can lead to unexpected behaviors
 - Impossible to code recovery logic for specific scenarios. If `doSomethingHeavy` fails, you can't recover from it. 
 
-### DO: Keep your code predictable, robust, solid and **effective** by:
-
-
-### Do instead:
+### DO
 
 ```js
 try {

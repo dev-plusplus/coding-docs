@@ -311,4 +311,4 @@ TODO:
 
 
 
-## 5. Deleting heavy objects (Objecct with lots of relationships)
+## 5. Deleting heavy objects (Object with lots of relationships)
