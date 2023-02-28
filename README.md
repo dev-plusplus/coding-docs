@@ -7,8 +7,6 @@
 3. Backend Frameworks: 8base, Supabase, Hasura and AWS
 4. Devops: GitHub, Buddy Works, and Slack
 5. Code Quality: ESLINT and Husky
-6. Libraries
-    * Logging: https://github.com/cobuildlab/pure-logger
 
 ## 0. General Product conventions:
 
@@ -45,9 +43,4 @@ Conventions specific to React code bases.
 
 Conventions specific to Javascript / Typescript code bases.
 
-## [5. 8base conventions](https://github.com/cobuildlab/8base-recipes)
-
-Conventions related to 8base applications
-
-
-## 6. And dozens of pending things... [HERE](https://github.com/cobuildlab/coding-docs/issues)
+## 5. And dozens of pending things... [HERE](https://github.com/dev-plusplus/coding-docs/issues)

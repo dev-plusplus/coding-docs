@@ -198,7 +198,6 @@ In addition to this, make sure you provide the proper information and compliant 
     * [Hooks utils](https://github.com/cobuildlab/hooks-utils)
     * [Stripe Utils](https://github.com/cobuildlab/stripe-utils)
     * [8base-utils](https://github.com/cobuildlab/8base-utils)
-    * [Logging library](https://github.com/cobuildlab/pure-logger)
  - Avoid code duplicity
  - Test are reasonably extensive
     

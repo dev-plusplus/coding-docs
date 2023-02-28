@@ -354,9 +354,4 @@ Ref: https://github.com/sindresorhus/eslint-plugin-unicorn/issues/652
 
 - Easier to read and understand to new developers.
 - Manage synchronous flow with asynchronous capabilities. 
-- Conventional preference: Even if both are acceptable solutions, one is preferred over the other one. 
-  
-  
-# 6) **Use pure logger for logging and catch constructs**
-  
-[https://github.com/cobuildlab/pure-logger](https://github.com/cobuildlab/pure-logger)
+- Conventional preference: Even if both are acceptable solutions, one is preferred over the other one.
