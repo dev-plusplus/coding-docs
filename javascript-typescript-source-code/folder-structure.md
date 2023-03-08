@@ -108,7 +108,3 @@ Module specific files that that holds functions related to permissions.
 
 ## *\*-utils* files
 Functions or Classes that can be App specific under `shared/` or module specific under: `modules/<module-name>/`
-
-## *\*.css* files
-As of these conventions the project should only have one `index.css` file, that holds general purpose styles like: Text, body styles, etc.
-

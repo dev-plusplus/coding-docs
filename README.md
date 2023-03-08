@@ -35,8 +35,6 @@ Conventions are not directly related to how the code is written.
 
 General conventions to write "effective code".
 
-## [3. Conventions for Javascript / Typescript source code:](./conventions/conventions-for-javascript-typescript-source-code.md)
-
 Conventions specific to Javascript / Typescript code bases.
 
 ## 4. And dozens of pending things... [HERE](https://github.com/dev-plusplus/coding-docs/issues)
