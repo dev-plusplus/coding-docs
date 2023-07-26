@@ -1,40 +1,44 @@
 ## **Folder Structure**
 
-> **NOTE: This convention only affects code style. Does not affect performance or readability, only consistency. And falls in the category of "choosing a single way of doing a task"**
+> **NOTE: This convention only affects coding style. Does not affect performance or readability, only consistency. And falls in the category of "choosing a single way of doing a task"**
 
-Organizing files is one of the most important conventions to keep a consistency and easy to maintain Application. Especially for large codebases and large teams, specially remote teams.
+Organizing files is one of the most important conventions to keep a consistency and easy to maintain Application. Especially for large codebases and large teams.
 
 I will only consider the structure under the `src` folder. Other folders and files of the project structure depends on other factors like the platform, linting tools, environment files, version control tools, react version, etc, and we will not cover that here.
 
 I use the terms **App Specific** to resources that can be used across the entire app, and **Module Specific** to resources that can only be used inside a module folder.
 
-
-Based in my experience for the last years working with large applications, I propose this file Structure with examples:
+Based in my experience for the last years working with large applications, this is the proposed file Structure with examples:
 
 ```
 src/ 
 └───modules/
 │   └───login/
 |	│   └───components/
-|	|	|	└───LoginForm.js
-|	|	|	└───LoginView.js
-|	|	└───actions.js
+|	|	|	└───LoginForm.jsx
+|	|	|	└───LoginView.jsx
+|	|	|	└───styles.js
+|	|	|	└───styles.scss
+|	│   └───state/
+|	|	|	└───store.js
+|	|	|	└───actions.js
+|	|	|	└───selectors.js
+|	|	|	└───reducers.js
+|	|	└───services.js
 |	|	└───models.js
 |	|	└───permissions.js
-|	|	└───services.js
 |	|	└───handlers.js
 |	|	└───queries.js
-|	|	└───store.js
 |	|	└───events.js
 |	|	└───...
 │   └───management/						// Nested modules
 |	│   └───school/
 | 	|	│   └───components/
-|	|	|	|	└───DashboardGraph.js
-|	|	|	|	└───NavitationBar.js
-|	|	|	|	└───SchoolCreateView.js
-|	|	|	|	└───SchoolUpdateView.js
-|	|	|	|	└───SchoolDetailView.js
+|	|	|	|	└───DashboardGraph.jsx
+|	|	|	|	└───NavitationBar.jsx
+|	|	|	|	└───SchoolCreateView.jsx
+|	|	|	|	└───SchoolUpdateView.jsx
+|	|	|	|	└───SchoolDetailView.jsx
 |	|	|	└───actions.js
 |	|	|	└───utils.js
 |	|	|	└───events.js
@@ -46,14 +50,17 @@ src/
 |	|	|	└───store.js
 |	|	|	└───...
 └───shared/
+│   └───navigation/
+│   |   └───navigator.js
 │   └───components/
 │	|   └───buttons/
+|	|	|	└───MainButton.jsx
 │	|   └───text/
 │	|   └───forms/
-|   │   SomeComponent.js
-|   │   AnotherUnclassifiedComponent.js
+|   │   SomeComponent.jsx
+|   │   AnotherUnclassifiedComponent.jsx
 │   └───constants/
-│       │   user-types.json
+│       │   user-types.js
 │   └───typings/
 │       │   ...
     └───assets/
@@ -64,8 +71,16 @@ src/
 │   string-utils.js
 │   validation-utils.js
 │   routes.js
-│   App.js
+│   app.js
  ```
+
+### General Rules
+
+- Follow the naming convention proposed in this repository. [See Naming Convention](https://github.com/dev-plusplus/coding-docs/blob/main/javascript-typescript-source-code/naming-convention.md)
+- Javascript files (modules) can contain multiple classes, functions, constants, etc, so by design the name on a file (module) should refer to a grouping of symbols with a purpose. The only exception for this is the React Components, that should be named with the same name of the file by convention.
+- Don't use `index.js` files to export members of complicated folder structures. Instead, don't use complicated folder structures in application code. If you have a complicated folder structure, perhaps you should consider refactor it into a library to abstract the complexity. [See why not to use index files on Application Code](https://github.com/dev-plusplus/coding-docs/blob/main/javascript-typescript-source-code/avoid-import-export-from-index-on-application-modules.md)
+- If the number of files in a folder grows beyond 10, consider branching into a new folder.
+- Don't create folders (modules) to host 1 or 2 purpose-specific components. Instead, create a folder (module) to host a group of components that are related to a specific purpose. 
 
 ###  `modules` folder
 Main folder to hold the Module Specific folders 
@@ -74,11 +89,11 @@ Main folder to hold the Module Specific folders
 
 The most non-deterministic task in this structure is to decide which ones are the "modules" of your Application. There is no rule of thumb for this, but I will give you the closest thing that I've used for this in frontend and backend applications:
 
-**Frontend:** Use as modules the highest elements of the Navigation of the UI. For Example: Users, Administration, Inbox, Notifications, My Profile, Invoices, Tickets, etc
+**Frontend:** Use as modules the highest elements of the Navigation of the UI. For Example: Users, Administration, Inbox, Notifications, My Profile, Invoices, Tickets, etc. And branch sub modules from it if necessary. 
 
 **Backend** Use as modules the strong entities of the Business Object Domain. For Example: Users, Invoices, Tickets, etc
 
-**EXTRA**: You can add any additional modules that you consider is Application Specific and that can be benefitial to isolate in its own folder. 
+**EXTRA**: You can add any additional modules that you consider is Application Specific and that can be beneficial to isolate in its own folder. 
 
 ### `shared` folder
 App Specific folder to hold any asset that is not an image and that it should be shared across modules.
@@ -97,8 +112,8 @@ Module specific files that holds Actions of the module. (See Architecture)
 ## *\*-models* files
 Module specific files that holds constants and Model Objects or Classes.
 
-## *\*-store* files
-Module specific files that that holds the store components. (See Architecture)
+## *\*-store* files (or redux)
+Module specific files that that holds the store and state components. (See Architecture)
 
 ## *\*-events* files
 Module specific files that that holds the events constants. (See Architecture)

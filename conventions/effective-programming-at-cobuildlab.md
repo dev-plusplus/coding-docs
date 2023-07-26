@@ -16,14 +16,16 @@ Here, we present a brief summary of the aspects of a good process of Code Review
 - The main goal of the Code Reviewing process is to increase the quality of the code base of any given project.
 - The Code Review can be used as a Learning Process as is a good tool to communicate the best practices and solutions to code owners.  
 - The reviewer has ownership over the code being reviewed thus is responsible for its quality as well. 
-- Secondary goals of the Code Review process are:
-    * Keep consistency in the code across the organization
-    * Detect defects before any merge event
-    * Identify common patterns that can be added to the Knowledge base of the organization (Conventions documents)
-    * Prevent unnecessary additions to the projects code base.
+
 - Comments on review should carry a proper explanation and alternative solution (if any)
 - Any conflicts that can't be agreed between author and reviewer needs to be escalated. 
 
+## Secondary goals of the Code Review process are:
+
+- Keep consistency in the code across the organization
+- Detect defects before any merge event
+- Identify common patterns that can be added to the Knowledge base of the organization (Conventions documents)
+- Prevent unnecessary additions to the projects code base.
 
 ## Preparing your code for reviewing:
 
